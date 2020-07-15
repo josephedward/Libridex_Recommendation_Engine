@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 import pandas as pd
 import urllib
 import os
@@ -21,18 +21,27 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 import warnings;
 warnings.filterwarnings('ignore')
-from scripts import initialize_book_data
+from book_scripts import initialize_book_data, get_recommendations
 
 app = Flask(__name__)
 
 
-test_df= initialize_book_data.initialize()
 
 @app.route("/test_csv/",methods=['GET'])
 def test_csv():
     test_csv_path="./resources/book_obj_list_v1.csv"
     test_df=pd.read_csv(test_csv_path)
     return test_df.to_csv(index=True)
+
+
+test_df= initialize_book_data.initialize(request.base_url)
+
+@app.route("/recommend/<dataset>/<book>/")
+def get_recommendation(dataset, book):
+    recommended = get_recommendations.get_rec(dataset,book)
+    return recommended
+
+
 
 
 if __name__ == '__main__':
