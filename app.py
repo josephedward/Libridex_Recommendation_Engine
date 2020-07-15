@@ -21,3 +21,22 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 import warnings;
 warnings.filterwarnings('ignore')
+from scripts import initialize_book_data
+
+app = Flask(__name__)
+
+
+test_df= initialize_book_data.initialize()
+
+@app.route("/test_csv/",methods=['GET'])
+def test_csv():
+    test_csv_path="./resources/book_obj_list_v1.csv"
+    test_df=pd.read_csv(test_csv_path)
+    return test_df.to_csv(index=True)
+
+
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+
