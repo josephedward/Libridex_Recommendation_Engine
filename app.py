@@ -10,6 +10,8 @@ import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 nltk.download('averaged_perceptron_tagger')
 from nltk.corpus import stopwords
+nltk.download('stopwords')
+
 from nltk.tokenize import RegexpTokenizer
 import re
 from sklearn.metrics.pairwise import cosine_similarity
