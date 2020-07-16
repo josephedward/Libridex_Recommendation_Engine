@@ -22,8 +22,11 @@ warnings.filterwarnings('ignore')
 
 def get_rec(data_df,book):
     language="English"
+    print("Test DataFrame Columns: ", data_df.columns)
     test_book_df=data_df
+
     title=book
+    print("Title: ", book)
     # Matching the language with the dataset and reset the index
     data = test_book_df.loc[test_book_df['language'] == language]  
     data.reset_index(level = 0, inplace = True) 
@@ -50,9 +53,13 @@ def get_rec(data_df,book):
     movie_indices = [i[0] for i in sig]
     # Top 5 book recommendation
     rec = data[['title']].iloc[movie_indices]   
+    print(rec.columns)
     # It reads the top 5 recommend book url and print the images
+    rec_whole_df= pd.DataFrame()
+    print("Recommendations: ")
     for i in rec['title']:
-        print(i)
+        print(data_df[data_df['title']==i])
+        rec_whole_df[i]=data_df[data_df['title']==i]
     #         response = requests.get(i)
     #         img = Image.open(BytesIO(response.content))
     #         plt.figure()

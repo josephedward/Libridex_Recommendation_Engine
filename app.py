@@ -26,7 +26,6 @@ from book_scripts import initialize_book_data, get_recommendations
 app = Flask(__name__)
 
 
-
 @app.route("/test_csv/",methods=['GET'])
 def test_csv():
     test_csv_path="./resources/book_obj_list_v1.csv"
@@ -34,11 +33,11 @@ def test_csv():
     return test_df.to_csv(index=True)
 
 
-test_df= initialize_book_data.initialize(request.base_url)
+test_df= initialize_book_data.initialize()
 
-@app.route("/recommend/<dataset>/<book>/")
-def get_recommendation(dataset, book):
-    recommended = get_recommendations.get_rec(dataset,book)
+@app.route("/recommend/<book>/")
+def get_recommendation(book):
+    recommended = get_recommendations.get_rec(test_df,book)
     return recommended
 
 

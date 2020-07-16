@@ -20,9 +20,9 @@ import warnings;
 warnings.filterwarnings('ignore')
 from flask import request
 
-def initialize(base):
-    file = request.get(base+"/test_csv")
-    test_book_df = pd.read_csv(file)
+def initialize():
+    # file = request.get(base+"/test_csv")
+    test_book_df = pd.read_csv("./resources/book_obj_list_v1.csv")
     # test_book_df = pd.read_csv("/test_csv/")
     test_book_df['cleaned_desc'] = test_book_df['description'].apply(func = make_lower_case)
     # test_book_df['cleaned_desc'] = df.cleaned_desc.apply(func = make_lower_case)
