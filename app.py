@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify
 import pandas as pd
 import urllib
 import os
@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import warnings;
 warnings.filterwarnings('ignore')
 from book_scripts import initialize_book_data, get_recommendations
+# import jsonify
 
 app = Flask(__name__)
 

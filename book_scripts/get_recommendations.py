@@ -53,15 +53,19 @@ def get_rec(data_df,book):
     movie_indices = [i[0] for i in sig]
     # Top 5 book recommendation
     rec = data[['title']].iloc[movie_indices]   
-    print(rec.columns)
+    print(rec)
     # It reads the top 5 recommend book url and print the images
-    rec_whole_df= pd.DataFrame()
-    print("Recommendations: ")
-    for i in rec['title']:
-        print(data_df[data_df['title']==i])
-        rec_whole_df[i]=data_df[data_df['title']==i]
+    # rec_whole_df= pd.DataFrame()
+    rec_whole_df = data_df[data_df['title'].isin(rec['title'])]
+    print(rec_whole_df)
+    return rec_whole_df.to_json(orient="records")
+    # print("Recommendations: ")
+    # for i in rec['title']:
+    #     print(data_df[data_df['title']==i])
+
+        # rec_whole_df[i]=data_df[data_df['title']==i]
     #         response = requests.get(i)
     #         img = Image.open(BytesIO(response.content))
     #         plt.figure()
     #         print(plt.imshow(img))
-    return rec
+    # return rec
