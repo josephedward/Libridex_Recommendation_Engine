@@ -62,7 +62,7 @@ def get_rec(data_df,book):
         return rec_whole_df.to_json(orient="records")
     except:
         print("exception in running analysis for: ", book)
-        return
+        return("exception in running analysis for: ", book)
         # print("Recommendations: ")
         # for i in rec['title']:
         #     print(data_df[data_df['title']==i])
