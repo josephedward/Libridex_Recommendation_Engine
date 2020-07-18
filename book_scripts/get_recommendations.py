@@ -28,40 +28,43 @@ def get_rec(data_df,book):
     title=book
     print("Title: ", book)
     # Matching the language with the dataset and reset the index
-    data = test_book_df.loc[test_book_df['language'] == language]  
-    data.reset_index(level = 0, inplace = True) 
-    # Convert the index into series
-    indices = pd.Series(data.index, index = data['title'])
-    # print(indices)
-    #Converting the book title into vectors and used bigram
-    tf = TfidfVectorizer(analyzer='word', ngram_range=(2, 2), min_df = 1, stop_words='english')
-    tfidf_matrix = tf.fit_transform(data['cleaned_desc'])
-    # print(tfidf_matrix)
-    # Calculating the similarity measures based on Cosine Similarity
-    sg = cosine_similarity(tfidf_matrix, tfidf_matrix)
-    # print(indices)    
-    # Get the index corresponding to original_title       
-    idx = indices[title]
-    # Get the pairwsie similarity scores 
-    sig = list(enumerate(sg[idx]))
-    # print(sig)
-    # Sort the books
-    sig = sorted(sig, key=lambda x: x[1], reverse=True)
-    # Scores of the 5 most similar books 
-    sig = sig[1:6]
-    # Book indicies
-    movie_indices = [i[0] for i in sig]
-    # Top 5 book recommendation
-    rec = data[['title']].iloc[movie_indices]   
-    print(rec)
-    # It reads the top 5 recommend book url and print the images
-    # rec_whole_df= pd.DataFrame()
-    rec_whole_df = data_df[data_df['title'].isin(rec['title'])]
-    print(rec_whole_df)
-    return rec_whole_df.to_json(orient="records")
-    # print("Recommendations: ")
-    # for i in rec['title']:
-    #     print(data_df[data_df['title']==i])
+    try:
+        data = test_book_df.loc[test_book_df['language'] == language]  
+        data.reset_index(level = 0, inplace = True) 
+        # Convert the index into series
+        indices = pd.Series(data.index, index = data['title'])
+        # print(indices)
+        #Converting the book title into vectors and used bigram
+        tf = TfidfVectorizer(analyzer='word', ngram_range=(2, 2), min_df = 1, stop_words='english')
+        tfidf_matrix = tf.fit_transform(data['cleaned_desc'])
+        # print(tfidf_matrix)
+        # Calculating the similarity measures based on Cosine Similarity
+        sg = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        # print(indices)    
+        # Get the index corresponding to original_title       
+        idx = indices[title]
+        # Get the pairwsie similarity scores 
+        sig = list(enumerate(sg[idx]))
+        # print(sig)
+        # Sort the books
+        sig = sorted(sig, key=lambda x: x[1], reverse=True)
+        # Scores of the 5 most similar books 
+        sig = sig[1:6]
+        # Book indicies
+        movie_indices = [i[0] for i in sig]
+        #   Top 5 book recommendation
+        rec = data[['title']].iloc[movie_indices]   
+        print(rec)
+        # It reads the top 5 recommend book url and print the images
+        # rec_whole_df= pd.DataFrame()
+        rec_whole_df = data_df[data_df['title'].isin(rec['title'])]
+        print(rec_whole_df)
+        return rec_whole_df.to_json(orient="records")
+    except:
+        print("exception in running analysis for: ", book)
+        # print("Recommendations: ")
+        # for i in rec['title']:
+        #     print(data_df[data_df['title']==i])
 
         # rec_whole_df[i]=data_df[data_df['title']==i]
     #         response = requests.get(i)
