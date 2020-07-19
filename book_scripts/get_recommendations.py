@@ -1,3 +1,4 @@
+from flask import jsonify
 import pandas as pd
 from bs4 import BeautifulSoup
 import time 
@@ -59,10 +60,10 @@ def get_rec(data_df,book):
         # rec_whole_df= pd.DataFrame()
         rec_whole_df = data_df[data_df['title'].isin(rec['title'])]
         print(rec_whole_df)
-        return rec_whole_df.to_json(orient="records")
+        return jsonify(rec_whole_df.to_json(orient="records"))
     except:
         print("exception in running analysis for: ", book)
-        return("exception in running analysis for: ", book)
+        return(jsonify("exception in running analysis"))
         # print("Recommendations: ")
         # for i in rec['title']:
         #     print(data_df[data_df['title']==i])
