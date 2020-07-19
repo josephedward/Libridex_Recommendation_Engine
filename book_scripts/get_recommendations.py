@@ -28,7 +28,7 @@ def get_rec(data_df,book):
     title=book
     print("Title: ", book)
     # Matching the language with the dataset and reset the index
-# book_name=title
+    # book_name=title
     try:
 # Matching the language with the dataset and reset the index
         data = book_df.loc[book_df['language'] == language]  
@@ -66,6 +66,7 @@ def get_rec(data_df,book):
         # rec_whole_df['lib_url'].to_list()
     except:
         print("error")
+        return("error")
         # if err== MemoryError:
         #     import IPython
         #     app = IPython.Application.instance()

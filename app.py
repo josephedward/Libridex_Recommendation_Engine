@@ -40,8 +40,10 @@ test_df= initialize_book_data.initialize()
 
 @app.route("/recommend/<book>/")
 def get_recommendation(book):
+    print('app.py -> book: ', book)
     recommended = get_recommendations.get_rec(test_df,book)
-    return recommended
+    print('app.py -> recommended: ', recommended)
+    return jsonify({"data": recommended})
 
 
 
