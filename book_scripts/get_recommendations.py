@@ -24,31 +24,32 @@ warnings.filterwarnings('ignore')
 def get_rec(data_df,book):
     language="English"
     print("Test DataFrame Columns: ", data_df.columns)
-    test_book_df=data_df
-
+    book_df=data_df
     title=book
     print("Title: ", book)
     # Matching the language with the dataset and reset the index
+# book_name=title
     try:
-        data = test_book_df.loc[test_book_df['language'] == language]  
+# Matching the language with the dataset and reset the index
+        data = book_df.loc[book_df['language'] == language]  
         data.reset_index(level = 0, inplace = True) 
         print('Convert the index into series')
         indices = pd.Series(data.index, index = data['title'])
-        # print(indices)
+    # print(indices)
         print("Converting the book title into vectors and used bigram")
         tf = TfidfVectorizer(analyzer='word', ngram_range=(2, 2), min_df = 1, stop_words='english')
         tfidf_matrix = tf.fit_transform(data['cleaned_desc'])
-        # print(tfidf_matrix)
+    # print(tfidf_matrix)
         print("Calculating the similarity measures based on Cosine Similarity")
         sg = cosine_similarity(tfidf_matrix, tfidf_matrix)
-        # print(indices)    
+    # print(indices)    
         print("Get the index corresponding to original_title")       
         idx = indices[title]
         print('Get the pairwise similarity scores') 
         sig = list(enumerate(sg[idx]))
-        # print(sig)
+    # print(sig)
         print("Sort the books")
-        sig = sorted(sig, key=lambda x: x[1], reverse=True)
+        sig = sorted(sig, key=lambda x: x[1].any(), reverse=True)
         print('Scores of the 5 most similar books') 
         sig = sig[1:6]
         print("Book indicies")
@@ -56,14 +57,21 @@ def get_rec(data_df,book):
         print("Top 5 book recommendation")
         rec = data[['title']].iloc[movie_indices]   
         print(rec)
-        # It reads the top 5 recommend book url and print the images
-        # rec_whole_df= pd.DataFrame()
-        rec_whole_df = data_df[data_df['title'].isin(rec['title'])]
-        print(rec_whole_df)
-        return jsonify(rec_whole_df.to_json(orient="records"))
+        rec = data[['title']].iloc[movie_indices]
+        rec_whole_df = book_df[book_df['title'].isin(rec['title'])]
+        return rec_whole_df.to_json(orient='records')
+    # print(rec_whole_df.to_json(orient='records'))
+    # print(book_df.loc[book_df['title'==book_name]])
+        # print(title)
+        # rec_whole_df['lib_url'].to_list()
     except:
-        print("exception in running analysis for: ", book)
-        return(jsonify("exception in running analysis"))
+        print("error")
+        # if err== MemoryError:
+        #     import IPython
+        #     app = IPython.Application.instance()
+        #     app.kernel.do_shutdown(True)
+        # print(err.message)
+        # print("continue bout ya business")
         # print("Recommendations: ")
         # for i in rec['title']:
         #     print(data_df[data_df['title']==i])
