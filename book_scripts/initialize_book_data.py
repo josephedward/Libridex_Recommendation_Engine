@@ -26,7 +26,7 @@ def initialize():
     # test_book_df = pd.read_csv("/test_csv/")
     test_book_df['cleaned_desc'] = test_book_df['description'].apply(func = make_lower_case)
     # test_book_df['cleaned_desc'] = df.cleaned_desc.apply(func = make_lower_case)
-    test_book_df['cleaned_desc'] = test_book_df.cleaned_desc.apply(func = remove_stop_words)
+    # test_book_df['cleaned_desc'] = test_book_df.cleaned_desc.apply(func = remove_stop_words)
     test_book_df['cleaned_desc'] = test_book_df.cleaned_desc.apply(func=remove_punctuation)
     test_book_df['cleaned_desc'] = test_book_df.cleaned_desc.apply(func=remove_html)
     return test_book_df
