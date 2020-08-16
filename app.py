@@ -11,7 +11,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 nltk.download('averaged_perceptron_tagger')
 from nltk.corpus import stopwords
 nltk.download('stopwords')
-
 from nltk.tokenize import RegexpTokenizer
 import re
 from sklearn.metrics.pairwise import cosine_similarity
@@ -28,29 +27,32 @@ from book_scripts import initialize_book_data, get_recommendations, get_static_r
 
 app = Flask(__name__)
 
+@app.route("/", methods=['GET'])
+def default():
+    return ("<h1>Default Route Works</h1>")
 
-@app.route("/test_csv/",methods=['GET'])
-def test_csv():
-    test_csv_path="./resources/book_obj_list_v1.csv"
-    test_df=pd.read_csv(test_csv_path)
-    return test_df.to_csv(index=True)
+# @app.route("/test_csv/",methods=['GET'])
+# def test_csv():
+#     test_csv_path="./resources/book_obj_list_v1.csv"
+#     test_df=pd.read_csv(test_csv_path)
+#     return test_df.to_csv(index=True)
 
-@app.route('/recommend_static/<book>')
-def rec_static(book):
-    print("static recommend file: ", book)
-    recs=get_static_rec.static_getrecs(book)
-    print("app.py recs: ", recs)
-    return jsonify(recs)
+# @app.route('/recommend_static/<book>')
+# def rec_static(book):
+#     print("static recommend file: ", book)
+#     recs=get_static_rec.static_getrecs(book)
+#     print("app.py recs: ", recs)
+#     return jsonify(recs)
 
 
-test_df= initialize_book_data.initialize()
+# test_df= initialize_book_data.initialize()
 
-@app.route("/recommend/<book>/")
-def get_recommendation(book):
-    print('app.py -> book: ', book)
-    recommended = get_recommendations.get_rec(test_df,book)
-    print('app.py -> recommended: ', recommended)
-    return jsonify({"data": recommended})
+# @app.route("/recommend/<book>/")
+# def get_recommendation(book):
+#     print('app.py -> book: ', book)
+#     recommended = get_recommendations.get_rec(test_df,book)
+#     print('app.py -> recommended: ', recommended)
+#     return jsonify({"data": recommended})
 
 
 
