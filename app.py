@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 import warnings;
 warnings.filterwarnings('ignore')
-from book_scripts import initialize_book_data, get_recommendations, get_static_rec
+# from book_scripts import initialize_book_data, get_recommendations, get_static_rec
 # import jsonify
 
 app = Flask(__name__)
