@@ -23,12 +23,10 @@ import os
 import sqlalchemy as sa
 from sqlalchemy import create_engine
 
-
 # connection_string = "postgres:postgres@localhost:5432/covid_db"
-
-DB_URL= os.environ['DATABASE_URL']
+# DB_URL= os.environ['DATABASE_URL']
 # print(os.environ)
-print("DB URL: ",DB_URL)
+# print("DB URL: ",DB_URL)
 # engine = create_engine(f'postgresql://{DB_URL}')
 # engine.table_names()
 
