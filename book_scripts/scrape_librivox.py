@@ -25,13 +25,13 @@ browser = Browser('chrome', **executable_path)
 
 
 def scrape():
-book_objs=[]
-for x in range(15000):
-    print("Searching Librivox ID: ",x)
-    librivox_id_search = f'https://librivox.org/api/feed/audiobooks/?id={x}'
-    # librivox_id_search = f'https://librivox.org/api/feed/audiobooks/?id=65'
-    try:
-          browser.visit(librivox_id_search)
+    book_objs=[]
+    for x in range(15000):
+        print("Searching Librivox ID: ",x)
+        librivox_id_search = f'https://librivox.org/api/feed/audiobooks/?id={x}'
+        # librivox_id_search = f'https://librivox.org/api/feed/audiobooks/?id=65'
+        try:
+            browser.visit(librivox_id_search)
             librivox_id_search_page = browser.html
             soup = BeautifulSoup(librivox_id_search_page, 'html.parser')
             lib_id=soup.find("id").get_text()
@@ -54,6 +54,6 @@ for x in range(15000):
                         "copyright_year":copyright_year,
                         "lib_url":lib_url                  
                             })
-    except: 
-        print("couldn't locate")
-        return book_objs
+        except: 
+            print("couldn't locate")
+            return book_objs

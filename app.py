@@ -22,37 +22,20 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 import warnings;
 warnings.filterwarnings('ignore')
-# from book_scripts import initialize_book_data, get_recommendations, get_static_rec
 # import jsonify
+from book_scripts import scrape_to_pg
+# initialize_book_data, get_recommendations, get_static_rec,
+ 
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def default():
+    scrape_to_pg
     return ("<h1>Default Route Works</h1>")
 
-# @app.route("/test_csv/",methods=['GET'])
-# def test_csv():
-#     test_csv_path="./resources/book_obj_list_v1.csv"
-#     test_df=pd.read_csv(test_csv_path)
-#     return test_df.to_csv(index=True)
-
-# @app.route('/recommend_static/<book>')
-# def rec_static(book):
-#     print("static recommend file: ", book)
-#     recs=get_static_rec.static_getrecs(book)
-#     print("app.py recs: ", recs)
-#     return jsonify(recs)
 
 
-# test_df= initialize_book_data.initialize()
-
-# @app.route("/recommend/<book>/")
-# def get_recommendation(book):
-#     print('app.py -> book: ', book)
-#     recommended = get_recommendations.get_rec(test_df,book)
-#     print('app.py -> recommended: ', recommended)
-#     return jsonify({"data": recommended})
 
 
 
