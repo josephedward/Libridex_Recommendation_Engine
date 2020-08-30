@@ -13,5 +13,6 @@ pip install nltk
 pip install sklearn
 pip install gensim
 pip install matplotlib
+pip isntall sqlalchemy
 # pip install jsonify
 python3 app.py
