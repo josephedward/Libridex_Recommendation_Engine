@@ -8,7 +8,7 @@
 # gensim==3.8.3
 # beautifulsoup4==4.9.1
 # scikit_learn==0.23.1
-Werkzeug==1.0.1
+# Werkzeug==1.0.1
 gunicorn==20.0.4
 
 absl-py                            ===0.9.0
