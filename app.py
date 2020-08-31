@@ -52,7 +52,6 @@ else:
 
 
 engine = create_engine(DB_URL)
-
 print(engine.table_names())
 
 
