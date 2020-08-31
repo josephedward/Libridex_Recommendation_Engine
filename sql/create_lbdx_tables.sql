@@ -1,6 +1,6 @@
-drop table if EXISTS book_table
+drop table if EXISTS book_table;
 
-create TABLE book_table(
+create table book_table(
     id SERIAL PRIMARY KEY ,
     libridex_id INT,
     author text,
@@ -9,5 +9,4 @@ create TABLE book_table(
     bk_lang text, 
     copyright_year int, 
     lib_book_url text, 
-    img_url text, 
-)
+    img_url text );
