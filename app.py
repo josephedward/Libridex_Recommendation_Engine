@@ -28,7 +28,7 @@ import sqlalchemy as sa
 from sqlalchemy import create_engine
 
 # import jsonify
-# from book_scripts import scrape_to_pg
+from book_scripts import scrape_to_pg
 # initialize_book_data, get_recommendations, get_static_rec,
  
 
@@ -38,22 +38,6 @@ app = Flask(__name__)
 def default():
     scrape_to_pg
     return ("<h1>Default Route Works</h1>")
-
-print(os.environ)
-is_prod =os.environ['PWD'] == "/app"
-if(is_prod):
-    print("is prod")
-    DB_URL= os.environ['DATABASE_URL']
-    print("DB URL: ",DB_URL)
-else:
-    print("not prod")
-    DB_URL=os.getenv("DB_URL")
-    print("DB URL: ",DB_URL)
-
-
-engine = create_engine(DB_URL)
-print(engine.table_names())
-
 
 
 if __name__ == '__main__':
