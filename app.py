@@ -26,18 +26,27 @@ from dotenv import load_dotenv
 load_dotenv()
 import sqlalchemy as sa
 from sqlalchemy import create_engine
-
-# import jsonify
-from book_scripts import scrape_to_pg
-# initialize_book_data, get_recommendations, get_static_rec,
+from sql import scrape_to_pg
  
-
 app = Flask(__name__)
+
 
 @app.route("/", methods=['GET'])
 def default():
-    scrape_to_pg
-    return ("<h1>Default Route Works</h1>")
+    return render_template("index.html")
+
+
+@app.route("/load072420", methods=['GET'])
+def load072420():
+    scrape_to_pg.bookList072420()
+    return
+
+
+@app.route("/init_db", methods=["GET"])
+def init_db():
+    scrape_to_pg.initialize_db()
+    return 
+
 
 
 if __name__ == '__main__':
