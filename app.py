@@ -26,7 +26,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import sqlalchemy as sa
 from sqlalchemy import create_engine
-from sql import scrape_to_pg
+from sql import pgControls
  
 app = Flask(__name__)
 
@@ -38,14 +38,20 @@ def default():
 
 @app.route("/load072420", methods=['GET'])
 def load072420():
-    scrape_to_pg.bookList072420()
-    return
+    pgControls.createBookList072420()
+    return ""
+
+@app.route("/displaydata", methods=['GET'])
+def display072420():
+    bookTableHTML = pgControls.displayBookList072420()
+    return render_template('table.html')
+    # return render_template("booktable.html",bookTableHTML=bookTableHTML)
 
 
 @app.route("/init_db", methods=["GET"])
 def init_db():
-    scrape_to_pg.initialize_db()
-    return 
+    # scrape_to_pg.initialize_db()
+    return render_template("dbstats.html", dbState=scrape_to_pg.initialize_db())
 
 
 

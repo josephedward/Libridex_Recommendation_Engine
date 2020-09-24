@@ -11,5 +11,7 @@ scikit_learn
 Werkzeug
 gunicorn
 SQLAlchemy
-psycopg2
-
+# dotenv
+psycopg2-binary
+python-dotenv
+IPython
